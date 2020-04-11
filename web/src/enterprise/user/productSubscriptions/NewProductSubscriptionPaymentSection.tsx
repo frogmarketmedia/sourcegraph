@@ -168,7 +168,7 @@ export class NewProductSubscriptionPaymentSection extends React.PureComponent<Pr
                                 parseISO(this.state.previewInvoiceOrError.afterInvoiceItem.expiresAt),
                                 Date.now()
                             )}{' '}
-                            ({formatUserCount(this.props.productSubscription.userCount)})
+                            ({formatUserCount(this.state.previewInvoiceOrError.afterInvoiceItem.userCount)})
                             {/* Include invisible LoadingSpinner to ensure that the height remains constant between loading and total. */}
                             <LoadingSpinner className="icon-inline invisible" />
                         </>

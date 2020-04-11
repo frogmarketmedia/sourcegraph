@@ -7,7 +7,6 @@ import * as GQL from '../../../../../shared/src/graphql/schema'
 import { asError, createAggregateError, ErrorLike, isErrorLike } from '../../../../../shared/src/util/errors'
 import { queryGraphQL } from '../../../backend/graphql'
 import { ProductPlanPrice } from './ProductPlanPrice'
-import { ProductPlanTiered } from './ProductPlanTiered'
 import { ErrorAlert } from '../../../components/alerts'
 
 interface Props {
@@ -92,15 +91,7 @@ export class ProductPlanFormControl extends React.Component<Props, State> {
                                         <div>
                                             <strong>{plan.name}</strong>
                                             <div className="text-muted">
-                                                {plan.planTiers.length > 0 ? (
-                                                    <ProductPlanTiered
-                                                        planTiers={plan.planTiers}
-                                                        tierMode={plan.tiersMode}
-                                                        minQuantity={plan.minQuantity}
-                                                    />
-                                                ) : (
-                                                    <ProductPlanPrice pricePerUserPerYear={plan.pricePerUserPerYear} />
-                                                )}
+                                                <ProductPlanPrice plan={plan} />
                                             </div>
                                         </div>
                                     </label>
@@ -138,6 +129,7 @@ function queryProductPlans(): Observable<GQL.IProductPlan[]> {
                         name
                         pricePerUserPerYear
                         minQuantity
+                        maxQuantity
                         tiersMode
                         planTiers {
                             unitAmount
